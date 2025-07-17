@@ -1,36 +1,275 @@
-
-
-
-
 #include <bits/stdc++.h>
-#include <iostream>
 using namespace std;
 
-getlongestsubarray(vector<int>&a, long long k){
-    int n=a.size();
-    int left=0,right=0;
-    long long sum=a[0];
-    int maxlen=0;
-    while(right<n){
-        while9left<=right&& sum>k) {
-            sum-=a[left];
-            left++;
+
+int maxpro(vector<int>&a,int n){
+    int result=a[0];
+    for(int i=0;i<n-1;i++){
+        int p=a[i];
+        for(int j=i+1;j<n;j++){
+            result=max(result,p);
+            p*=a[j];
         }
-        if(sum==k){
-            maxlen=max(maxlen,right-left+1);
-        }
-        right++;
-        if(right<n)sum+=a[right];
+        result=max(result,p);
     }
-    return maxlen;
+
+return result;
 }
-int main(){
-    vector<int> a={2,3,4,5,1,9};
-    long long k=10;
-    int len =getlongestsubarray(a,k);
-    cout<<"the length of the longest subarray is: "<<len<<"\n";
+int main() {
+    vector<int> nums = {1,2,-3,0,-4,-5};
+    int n=6;
+    cout<<"The maximum product subarray: "<<maxpro(nums,6);
     return 0;
 }
+
+
+
+
+// #include<iostream>
+// #include<bits/stdc++.h>
+// using namespace std;
+// vector<int> genrate(int row){
+//     long long ans=1;
+// vector<int>ansrow;
+// ansrow.push_back(1);
+// for(int col=1;col<=row;col++){
+// ans=ans*(row-col);
+// ans=ans/col;
+// }
+// return ansrow;
+// }
+// vector<vector<int>> pascal(int n){
+//     vector<vector<int>>ans;
+//     for(int i=1;i<=n;i++){
+//         vector<int>temp=genrate(i);
+//         ans.push_back(temp);
+//     }
+// }
+// int main()
+// {
+//     int n = 5;
+//     vector<vector<int>> ans = pascal(n);
+// for(auto it:ans){
+//     for(int num:it){
+//         cout<<num<<" ";
+//     }
+//     cout<<endl;
+// }
+//     return 0;
+// }
+
+// vector<int> printLeaders(int nums[],int n){
+//     vector<int> ans;
+// int max=nums[n-1];
+// ans.push_back(nums[n-1]);
+// for(int i=n-2;i>=0;i--){
+//     if(nums[i]>max){
+//         ans.push_back(nums[i]);
+//         max=nums[i];
+//     }
+// }
+// return ans;
+// }
+// int main() {
+    
+//     // Array Initialization.
+//     int n = 6;
+//    int  nums[n] = {10, 22, 12, 3, 0, 6};
+  
+//     vector<int> ans = printLeaders(nums,n);
+    
+    
+//     for(int i = ans.size()-1;i>=0;i--){
+        
+//         cout<<ans[i]<<" ";
+//     }
+    
+//     cout<<endl;
+//     return 0;
+//   }
+// int maxProfit(vector<int> &price){
+//     int profit=0;
+
+//     int mini=price[0];
+//     int n=price.size();
+//     for(int i=0;i<n;i++){
+//         int cost=price[i]-mini;
+//         profit=max(profit,cost);
+//         mini=min(mini,price[i]);
+//     }
+//     return profit;
+// }
+// int main() {
+//     vector<int> arr = {7,1,5,3,6,4};
+//     int maxPro = maxProfit(arr);
+//     cout << "Max profit is: " << maxPro << endl;
+// }
+//print subarray with max subarray sum
+/*long long maxSubarraySum(int arr[], int n) {
+    long long maxi = LONG_MIN; // maximum sum
+    long long sum = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        sum += arr[i];
+
+        if (sum > maxi) {
+            maxi = sum;
+        }
+
+        // If sum < 0: discard the sum calculated
+        if (sum < 0) {
+            sum = 0;
+        }
+    }
+
+    // To consider the sum of the empty subarray
+    // uncomment the following check:
+
+    //if (maxi < 0) maxi = 0;
+
+    return maxi;
+}
+
+int main()
+{
+    int arr[] = { -2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    long long maxSum = maxSubarraySum(arr, n);
+    cout << "The maximum subarray sum is: " << maxSum << endl;
+    return 0;
+}
+*/
+
+//majority element (n/2)
+// #include <bits/stdc++.h>
+// using namespace std;
+// int majorityElement(vector<int> nums){
+//     int n=nums.size();
+//     int cnt=0;
+// int el;
+// for(int i=0;i<n;i++){
+//     if(cnt==0){
+//         cnt=1;
+//         el=nums[i];
+//     }
+//     else if(el==nums[i])cnt++;
+//     else cnt--;
+// }
+// int cnt1=0;
+// for(int i=0;i<n;i++){
+//     if(nums[i]==el){
+//         cnt1++;
+//     }
+// }
+// if(cnt1>(n/2))return el;
+// return -1;
+// };
+// int main()
+// {
+//     vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
+//     int ans = majorityElement(arr);
+//     cout << "The majority element is: " << ans << endl;
+//     return 0;
+// }
+
+
+//sort array for 0 1 and 2
+// class Solution{
+    
+//     public:
+//     void sortarray(vector<int>& arr, int n){
+//         int low=0,mid=0,high=n-1;
+//         while(mid<=high){
+//             if(arr[mid]==0){
+//                 swap(arr[low],arr[mid]);
+//                 mid++;
+//                 low++;
+//             }
+//             else if(arr[mid]==1){
+//                 mid++;
+//             }else{
+//                 swap(arr[mid],arr[high]);
+//                 high--;
+//             }
+//         }
+//     }
+// };
+// int main()
+// {
+//     int n = 6;
+//     vector<int> arr = {0, 2, 1, 2, 0, 1};
+//     Solution sol;
+//     sol.sortarray(arr, n);
+//     cout << "After sorting:" << endl;
+//     for (int i = 0; i < n; i++) {
+//         cout << arr[i] << " ";
+//     }
+//     cout << endl;
+//     return 0;
+// }
+//*** sum of two numbers leading to a particular target
+// class Solution{
+//     public:
+//     vector<int> twosum(vector<int> & arr,int target,int n){
+// sort(arr.begin(),arr.end());
+// int left=0,right=n-1;
+// vector<int> vec;
+// while(left<right){
+//     int sum=arr[left]+arr[right];
+//     if(sum ==target){
+//     vec.push_back(arr[left]);
+//     vec.push_back(arr[right]);
+//     return vec;
+//     }
+//     else if (sum<target)left++;
+// else right--;
+// }
+// return {-1,-1};
+//     }
+// };
+// int main()
+// {
+//     int n = 5;
+//     vector<int> arr = {2, 6, 5, 8, 11};
+//     int target = 14;
+//     Solution sol;
+//     vector<int> ans = sol.twosum(arr,target,n);
+//     cout << "This is the answer for variant 1: [" << ans[0] <<","<< ans[1]<<"]"<<endl;
+//     return 0;
+// }
+//***longest subarray with given sum k
+// class Solution{
+//     public:
+//     int largestarr(vector <int> &arr,long long k){
+//         int left=0;
+//         int right=0;
+//         long long sum=arr[0];
+//         int maxl=0;
+//         int n=arr.size();
+//         while(right<n){
+// while(left<=right && sum>k){
+//     sum-=arr[left];
+//     left++;
+// }
+// if(sum==k){
+//     maxl=max(maxl,right-left+1);
+// }
+// right++;
+// if(right<n)sum+=arr[right];
+//         }
+//         return maxl;
+//   }
+// };
+// int main()
+// {
+//     vector<int> arr = {2, 3, 5, 1, 9};
+//     long long k = 10;
+//     Solution sol;
+//     int len = sol.largestarr(arr, k);
+//     cout << "The length of the longest subarray is: " << len << "\n";
+//     return 0;
+// }
 
 //to find no which occurs only single time
 // class Solution{    
